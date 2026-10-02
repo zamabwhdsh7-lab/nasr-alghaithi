@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>مطعم الذوق | مذاق يستحق التجربة</title>
+
+    <meta name="description"
+          content="مطعم الذوق - أشهى الوجبات والمشروبات بتجربة عصرية ومميزة">
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+</head>
+
+<body>
+
+<!-- =========================
+     شاشة التحميل
+========================= -->
+<div class="loader" id="loader">
+    <div class="loader-content">
+        <div class="loader-logo">ذ</div>
+        <h2>مطعم الذوق</h2>
+        <div class="loader-line"></div>
+    </div>
+</div>
+
+
+<!-- =========================
+     الشريط العلوي
+========================= -->
+<header class="header" id="header">
+
+    <div class="container nav-container">
+
+        <a href="#home" class="logo">
+            <span class="logo-icon">ذ</span>
+
+            <span class="logo-text">
+                <strong>الذوق</strong>
+                <small>Restaurant</small>
+            </span>
+        </a>
+
+        <nav class="nav" id="nav">
+
+            <a href="#home" class="nav-link active">الرئيسية</a>
+            <a href="#menu" class="nav-link">القائمة</a>
+            <a href="#about" class="nav-link">عن المطعم</a>
+            <a href="#gallery" class="nav-link">المعرض</a>
+            <a href="#reviews" class="nav-link">آراء العملاء</a>
+            <a href="#contact" class="nav-link">تواصل معنا</a>
+
+        </nav>
+
+        <div class="nav-actions">
+
+            <button class="icon-btn" id="themeBtn" title="الوضع الليلي">
+                ◐
+            </button>
+
+            <button class="cart-btn" id="cartBtn">
+                <span>🛒</span>
+                <b id="cartCount">0</b>
+            </button>
+
+            <button class="menu-toggle" id="menuToggle">
+                ☰
+            </button>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- =========================
+     الرئيسية
+========================= -->
+<main>
+
+<section class="hero" id="home">
+
+    <div class="hero-overlay"></div>
+
+    <div class="container hero-container">
+
+        <div class="hero-content">
+
+            <span class="hero-badge">
+                ✦ نكهة تستحق التجربة
+            </span>
+
+            <h1>
+                مذاق مختلف
+                <span>في كل لقمة</span>
+            </h1>
+
+            <p>
+                في مطعم الذوق نقدم لك تجربة تجمع بين جودة المكونات،
+                روعة الطعم، وأناقة التقديم.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#menu" class="primary-btn">
+                    اكتشف قائمتنا
+                    <span>←</span>
+                </a>
+
+                <a href="#about" class="secondary-btn">
+                    تعرف علينا
+                </a>
+
+            </div>
+
+            <div class="hero-info">
+
+                <div>
+                    <strong>+10</strong>
+                    <span>سنوات خبرة</span>
+                </div>
+
+                <div>
+                    <strong>+50</strong>
+                    <span>صنف مميز</span>
+                </div>
+
+                <div>
+                    <strong>4.9</strong>
+                    <span>تقييم العملاء</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     المميزات
+========================= -->
+<section class="features">
+
+    <div class="container features-grid">
+
+        <div class="feature-card">
+            <div class="feature-icon">🍔</div>
+            <div>
+                <h3>طعام طازج</h3>
+                <p>نستخدم مكونات مختارة بعناية.</p>
+            </div>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <div>
+                <h3>تحضير سريع</h3>
+                <p>نجهز طلبك بأسرع وقت ممكن.</p>
+            </div>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">⭐</div>
+            <div>
+                <h3>جودة مضمونة</h3>
+                <p>جودة نهتم بها في كل تفاصيلنا.</p>
+            </div>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">🚚</div>
+            <div>
+                <h3>توصيل</h3>
+                <p>استمتع بطلبك أينما كنت.</p>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     القائمة
+========================= -->
+<section class="menu-section section" id="menu">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span>قائمتنا</span>
+
+            <h2>
+                اختر ما يناسب
+                <strong>ذوقك</strong>
+            </h2>
+
+            <p>
+                مجموعة مختارة من الأطباق التي يحبها عملاؤنا.
+            </p>
+
+        </div>
+
+
+        <!-- البحث -->
+        <div class="menu-tools">
+
+            <div class="search-box">
+                <span>⌕</span>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="ابحث عن وجبتك..."
+                >
+            </div>
+
+            <div class="categories" id="categories">
+
+                <button class="category active" data-category="all">
+                    الكل
+                </button>
+
+                <button class="category" data-category="burger">
+                    برجر
+                </button>
+
+                <button class="category" data-category="pizza">
+                    بيتزا
+                </button>
+
+                <button class="category" data-category="meal">
+                    وجبات
+                </button>
+
+                <button class="category" data-category="drink">
+                    مشروبات
+                </button>
+
+                <button class="category" data-category="dessert">
+                    حلويات
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- المنتجات -->
+        <div class="products-grid" id="productsGrid">
+
+            <!-- يتم إنشاء المنتجات بواسطة JavaScript -->
+
+        </div>
+
+        <div class="no-results" id="noResults">
+            <div>🍽️</div>
+            <h3>لم نجد ما تبحث عنه</h3>
+            <p>جرب كلمة بحث أخرى.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     عن المطعم
+========================= -->
+<section class="about section" id="about">
+
+    <div class="container about-grid">
+
+        <div class="about-images">
+
+            <div class="about-image main-image">
+                🍽️
+            </div>
+
+            <div class="about-image small-image">
+                👨‍🍳
+            </div>
+
+            <div class="experience-box">
+                <strong>10+</strong>
+                <span>سنوات من الخبرة</span>
+            </div>
+
+        </div>
+
+
+        <div class="about-content">
+
+            <span class="section-label">
+                قصتنا
+            </span>
+
+            <h2>
+                أكثر من مجرد
+                <strong>مطعم</strong>
+            </h2>
+
+            <p>
+                بدأ مطعم الذوق بفكرة بسيطة:
+                تقديم طعام لذيذ بجودة عالية وتجربة تجعل كل زيارة مختلفة.
+            </p>
+
+            <p>
+                نهتم باختيار المكونات، طريقة التحضير،
+                جودة الخدمة، وحتى التفاصيل الصغيرة التي تجعل تجربتك معنا أجمل.
+            </p>
+
+            <div class="about-points">
+
+                <div>
+                    <span>✓</span>
+                    <p>مكونات طازجة يوميًا</p>
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    <p>وصفات خاصة بالمطعم</p>
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    <p>خدمة عملاء مميزة</p>
+                </div>
+
+            </div>
+
+            <a href="#contact" class="primary-btn">
+                تواصل معنا
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     معرض الصور
+========================= -->
+<section class="gallery section" id="gallery">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span>المعرض</span>
+
+            <h2>
+                لمحات من
+                <strong>الذوق</strong>
+            </h2>
+
+        </div>
+
+        <div class="gallery-grid">
+
+            <div class="gallery-item large">
+                🍔
+                <span>وجباتنا</span>
+            </div>
+
+            <div class="gallery-item">
+                🍕
+                <span>بيتزا</span>
+            </div>
+
+            <div class="gallery-item">
+                🥤
+                <span>مشروبات</span>
+            </div>
+
+            <div class="gallery-item">
+                🍰
+                <span>حلويات</span>
+            </div>
+
+            <div class="gallery-item">
+                👨‍🍳
+                <span>مطبخنا</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     آراء العملاء
+========================= -->
+<section class="reviews section" id="reviews">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span>آراء العملاء</span>
+
+            <h2>
+                ماذا يقول
+                <strong>عملاؤنا؟</strong>
+            </h2>
+
+        </div>
+
+
+        <div class="reviews-grid">
+
+            <article class="review-card">
+
+                <div class="review-top">
+                    <div class="avatar">م</div>
+
+                    <div>
+                        <h3>محمد أحمد</h3>
+                        <span>عميل</span>
+                    </div>
+
+                    <div class="stars">★★★★★</div>
+                </div>
+
+                <p>
+                    تجربة جميلة جدًا والطعام كان ممتازًا،
+                    وأعجبني اهتمامهم بالتفاصيل.
+                </p>
+
+            </article>
+
+
+            <article class="review-card">
+
+                <div class="review-top">
+                    <div class="avatar">س</div>
+
+                    <div>
+                        <h3>سارة علي</h3>
+                        <span>عميلة</span>
+                    </div>
+
+                    <div class="stars">★★★★★</div>
+                </div>
+
+                <p>
+                    المكان جميل والوجبات لذيذة،
+                    بالتأكيد سأكرر الزيارة.
+                </p>
+
+            </article>
+
+
+            <article class="review-card">
+
+                <div class="review-top">
+                    <div class="avatar">ع</div>
+
+                    <div>
+                        <h3>عبدالله</h3>
+                        <span>عميل</span>
+                    </div>
+
+                    <div class="stars">★★★★★</div>
+                </div>
+
+                <p>
+                    الخدمة سريعة والطعم رائع،
+                    خصوصًا البرجر والبيتزا.
+                </p>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     التواصل
+========================= -->
+<section class="contact section" id="contact">
+
+    <div class="container contact-box">
+
+        <div class="contact-content">
+
+            <span class="section-label">
+                تواصل معنا
+            </span>
+
+            <h2>
+                جاهزون لخدمتكم
+            </h2>
+
+            <p>
+                لديك سؤال أو تريد طلب وجبتك؟
+                تواصل معنا وسنكون سعداء بخدمتك.
+            </p>
+
+            <div class="contact-details">
+
+                <div>
+                    <span>📞</span>
+                    <div>
+                        <small>اتصل بنا</small>
+                        <strong>777 000 000</strong>
+                    </div>
+                </div>
+
+                <div>
+                    <span>📍</span>
+                    <div>
+                        <small>العنوان</small>
+                        <strong>شارع المطاعم - المدينة</strong>
+                    </div>
+                </div>
+
+                <div>
+                    <span>🕐</span>
+                    <div>
+                        <small>أوقات العمل</small>
+                        <strong>10 صباحًا - 12 مساءً</strong>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="contact-form">
+
+            <h3>أرسل لنا رسالة</h3>
+
+            <form id="contactForm">
+
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="الاسم"
+                    required
+                >
+
+                <input
+                    type="tel"
+                    id="phone"
+                    placeholder="رقم الهاتف"
+                    required
+                >
+
+                <textarea
+                    id="message"
+                    placeholder="اكتب رسالتك..."
+                    required
+                ></textarea>
+
+                <button type="submit" class="primary-btn">
+                    إرسال الرسالة
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- =========================
+     التذييل
+========================= -->
+<footer class="footer">
+
+    <div class="container footer-grid">
+
+        <div class="footer-brand">
+
+            <a href="#home" class="logo">
+
+                <span class="logo-icon">ذ</span>
+
+                <span class="logo-text">
+                    <strong>الذوق</strong>
+                    <small>Restaurant</small>
+                </span>
+
+            </a>
+
+            <p>
+                مذاق مختلف، تجربة تستحق أن تعيشها.
+            </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <h3>روابط سريعة</h3>
+
+            <a href="#home">الرئيسية</a>
+            <a href="#menu">القائمة</a>
+            <a href="#about">عن المطعم</a>
+            <a href="#contact">تواصل معنا</a>
+
+        </div>
+
+
+        <div class="footer-social">
+
+            <h3>تابعنا</h3>
+
+            <div class="socials">
+
+                <a href="#" aria-label="Facebook">f</a>
+                <a href="#" aria-label="Instagram">◎</a>
+                <a href="#" aria-label="WhatsApp">W</a>
+                <a href="#" aria-label="TikTok">♪</a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <p>
+            © <span id="year"></span> مطعم الذوق — جميع الحقوق محفوظة
+        </p>
+
+        <p>
+            تصميم وتطوير <strong>نصر الغيثي</strong>
+        </p>
+
+    </div>
+
+</footer>
+
+
+<!-- =========================
+     السلة الجانبية
+========================= -->
+<div class="cart-overlay" id="cartOverlay"></div>
+
+<aside class="cart-sidebar" id="cartSidebar">
+
+    <div class="cart-header">
+
+        <div>
+            <span>طلبك</span>
+            <h2>سلة المشتريات</h2>
+        </div>
+
+        <button id="closeCart">×</button>
+
+    </div>
+
+
+    <div class="cart-items" id="cartItems">
+
+        <div class="empty-cart">
+
+            <div>🛒</div>
+
+            <h3>السلة فارغة</h3>
+
+            <p>
+                أضف بعض الوجبات اللذيذة إلى سلتك.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="cart-footer">
+
+        <div class="total-row">
+            <span>المجموع</span>
+            <strong id="cartTotal">0 ريال</strong>
+        </div>
+
+        <button class="checkout-btn" id="checkoutBtn">
+            إتمام الطلب
+        </button>
+
+    </div>
+
+</aside>
+
+
+<!-- =========================
+     نافذة تفاصيل المنتج
+========================= -->
+<div class="modal-overlay" id="productModal">
+
+    <div class="product-modal">
+
+        <button class="modal-close" id="modalClose">
+            ×
+        </button>
+
+        <div class="modal-image" id="modalImage">
+            🍔
+        </div>
+
+        <div class="modal-content">
+
+            <span class="modal-category" id="modalCategory">
+                برجر
+            </span>
+
+            <h2 id="modalTitle">
+                برجر الذوق
+            </h2>
+
+            <p id="modalDescription">
+                وصف الوجبة
+            </p>
+
+            <div class="modal-bottom">
+
+                <strong id="modalPrice">
+                    1500 ريال
+                </strong>
+
+                <button class="primary-btn" id="modalAdd">
+                    أضف للسلة
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     إشعار
+========================= -->
+<div class="toast" id="toast">
+    <span>✓</span>
+    <p id="toastMessage">تمت الإضافة للسلة</p>
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
