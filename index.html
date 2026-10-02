@@ -719,9 +719,15 @@ function closeProjectModal() {
 }
 
 // إغلاق النافذة عند الضغط خارجها
-document.getElementById('projectModal').addEventListener('click', (e) => {
-  if (e.target.id === 'projectModal') closeProjectModal();
-});
+const projectModal = document.getElementById('projectModal');
+
+if (projectModal) {
+  projectModal.addEventListener('click', (e) => {
+    if (e.target.id === 'projectModal') {
+      closeProjectModal();
+    }
+  });
+}
 
 // 6. حفظ المشروع (إضافة أو تعديل)
 async function saveProject(event) {
