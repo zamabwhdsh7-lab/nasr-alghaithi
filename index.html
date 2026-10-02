@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>نصر الغيثي | مطور برمجيات وتقنيات</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/tajawal@5.0.2/index.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/tajawal@5.0.2/700.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/tajawal@5.0.2/900.css">
+<style>
+:root{
+  --bg-0:#05070d;
+  --bg-1:#0a0f1c;
+  --bg-2:#0f172a;
+  --primary:#38bdf8;
+  --primary-2:#0ea5e9;
+  --accent:#22d3ee;
+  --text:#e2e8f0;
+  --text-dim:#94a3b8;
+  --text-mute:#64748b;
+  --border:rgba(56,189,248,0.15);
+  --glass:rgba(15,23,42,0.55);
+  --glass-strong:rgba(15,23,42,0.75);
+  --glow:0 0 40px rgba(56,189,248,0.15);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Tajawal',system-ui,sans-serif;
+  background:var(--bg-0);
+  color:var(--text);
+  line-height:1.7;
+  overflow-x:hidden;
+  min-height:100vh;
+}
+body::before{
+  content:'';position:fixed;inset:0;
+  background:radial-gradient(ellipse at 20% 0%, rgba(56,189,248,0.12), transparent 50%),
+  radial-gradient(ellipse at 80% 100%, rgba(34,211,238,0.08), transparent 50%),
+  radial-gradient(ellipse at 50% 50%, rgba(14,165,233,0.05), transparent 70%);
+  pointer-events:none;z-index:0;
+}
+body::after{
+  content:'';position:fixed;inset:0;
+  background-image:linear-gradient(rgba(56,189,248,0.03) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(56,189,248,0.03) 1px, transparent 1px);
+  background-size:50px 50px;pointer-events:none;z-index:0;
+  mask-image:radial-gradient(ellipse at center, black 30%, transparent 80%);
+}
+.container{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+
+/* ===== NAVBAR ===== */
+.navbar{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(20px);background:rgba(5,7,13,0.75);border-bottom:1px solid var(--border);transition:all .3s}
+.nav-inner{max-width:1200px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.nav-logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:18px;color:var(--text);text-decoration:none}
+.nav-logo-mark{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--primary),var(--accent));display:grid;place-items:center;color:#001018;font-weight:900;font-size:16px;box-shadow:0 0 20px rgba(56,189,248,0.4)}
+.nav-links{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.nav-links a{color:var(--text-dim);text-decoration:none;padding:8px 14px;border-radius:8px;font-size:14px;font-weight:500;transition:all .25s}
+.nav-links a:hover{color:var(--primary);background:rgba(56,189,248,0.08)}
+.nav-toggle{display:none;background:none;border:1px solid var(--border);color:var(--text);width:40px;height:40px;border-radius:10px;cursor:pointer;font-size:20px}
+@media (max-width:900px){
+  .nav-links{position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;background:var(--glass-strong);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:12px;gap:4px;transform:translateY(-10px);opacity:0;pointer-events:none;transition:all .25s}
+  .nav-links.open{transform:translateY(0);opacity:1;pointer-events:auto}
+  .nav-toggle{display:block}
+  .nav-links a{padding:12px 16px}
+}
+
+/* ===== HERO ===== */
+.hero{min-height:100vh;display:flex;align-items:center;padding:120px 0 80px;position:relative}
+.hero-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:60px;align-items:center}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:40px;text-align:center}}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;background:rgba(56,189,248,0.08);border:1px solid var(--border);color:var(--primary);font-size:13px;font-weight:600;margin-bottom:24px}
+.hero-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
+.hero h1{font-size:clamp(32px,5vw,56px);font-weight:900;line-height:1.15;margin-bottom:16px;background:linear-gradient(135deg,#fff 0%,#cbd5e1 50%,var(--primary) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero .role{font-size:clamp(18px,2.5vw,24px);color:var(--primary);font-weight:700;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+@media (max-width:900px){.hero .role{justify-content:center}}
+.hero .role::before{content:'';width:30px;height:2px;background:var(--primary)}
+@media (max-width:900px){.hero .role::before{display:none}}
+.hero p.intro{font-size:17px;color:var(--text-dim);max-width:560px;margin-bottom:32px}
+@media (max-width:900px){.hero p.intro{margin-inline:auto}}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+@media (max-width:900px){.hero-actions{justify-content:center}}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:12px;font-family:inherit;font-weight:700;font-size:15px;text-decoration:none;cursor:pointer;border:none;transition:all .25s}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-2));color:#001018;box-shadow:0 8px 24px rgba(56,189,248,0.3)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(56,189,248,0.45)}
+.btn-ghost{background:rgba(56,189,248,0.08);color:var(--text);border:1px solid var(--border)}
+.btn-ghost:hover{background:rgba(56,189,248,0.15);border-color:var(--primary)}
+.hero-visual{position:relative;aspect-ratio:1;max-width:440px;margin-inline:auto;width:100%}
+.hero-card{position:absolute;inset:0;border-radius:24px;background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--border);padding:28px;display:flex;flex-direction:column;gap:16px;box-shadow:var(--glow);overflow:hidden}
+.hero-card::before{content:'';position:absolute;top:-50%;right:-50%;width:200%;height:200%;background:conic-gradient(from 0deg,transparent,rgba(56,189,248,0.1),transparent 30%);animation:rotate 10s linear infinite}
+@keyframes rotate{to{transform:rotate(360deg)}}
+.code-header{display:flex;gap:6px;position:relative;z-index:1}
+.code-header span{width:12px;height:12px;border-radius:50%;background:#334155}
+.code-header span:nth-child(1){background:#ef4444}
+.code-header span:nth-child(2){background:#eab308}
+.code-header span:nth-child(3){background:#22c55e}
+.code-body{position:relative;z-index:1;font-family:'Courier New',monospace;font-size:13px;line-height:1.9;color:var(--text-dim);direction:ltr;text-align:left}
+.code-body .k{color:#f472b6}.code-body .s{color:#86efac}.code-body .v{color:var(--primary)}.code-body .c{color:#64748b;font-style:italic}
+.floating-chip{position:absolute;background:var(--glass-strong);backdrop-filter:blur(16px);border:1px solid var(--border);padding:10px 16px;border-radius:12px;display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,0.4);animation:float 4s ease-in-out infinite}
+.floating-chip svg{width:18px;height:18px;color:var(--primary)}
+.chip-1{top:-10px;right:-10px;animation-delay:0s}.chip-2{bottom:20px;left:-20px;animation-delay:1.5s}.chip-3{top:40%;left:-30px;animation-delay:3s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@media (max-width:900px){.hero-visual{max-width:340px}.chip-3{display:none}}
+
+/* ===== SECTIONS ===== */
+section{padding:90px 0;position:relative}
+.section-head{text-align:center;margin-bottom:56px}
+.section-tag{display:inline-block;padding:6px 14px;border-radius:999px;background:rgba(56,189,248,0.08);border:1px solid var(--border);color:var(--primary);font-size:13px;font-weight:700;margin-bottom:16px;letter-spacing:1px}
+.section-title{font-size:clamp(28px,4vw,40px);font-weight:900;margin-bottom:12px;color:#fff}
+.section-sub{color:var(--text-dim);font-size:16px;max-width:640px;margin:0 auto}
+
+/* ===== ABOUT ===== */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+@media (max-width:800px){.about-grid{grid-template-columns:1fr}}
+.about-card{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:20px;padding:32px;transition:all .3s}
+.about-card:hover{border-color:rgba(56,189,248,0.35);transform:translateY(-4px)}
+.about-card h3{font-size:20px;font-weight:800;margin-bottom:14px;color:var(--primary);display:flex;align-items:center;gap:10px}
+.about-card p{color:var(--text-dim);font-size:15px}
+.about-card ul{list-style:none;margin-top:14px}
+.about-card li{padding:10px 0;border-bottom:1px dashed rgba(148,163,184,0.15);color:var(--text-dim);font-size:14px;display:flex;align-items:center;gap:10px}
+.about-card li:last-child{border-bottom:none}
+.about-card li::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--primary);box-shadow:0 0 8px var(--primary);flex-shrink:0}
+
+/* ===== EDUCATION ===== */
+.edu-card{max-width:700px;margin:0 auto;background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:20px;padding:36px;display:flex;gap:24px;align-items:center;transition:all .3s}
+.edu-card:hover{border-color:rgba(56,189,248,0.35);transform:translateY(-4px)}
+.edu-icon{width:80px;height:80px;border-radius:18px;flex-shrink:0;background:linear-gradient(135deg,rgba(56,189,248,0.2),rgba(34,211,238,0.1));border:1px solid var(--border);display:grid;place-items:center;color:var(--primary)}
+.edu-icon svg{width:40px;height:40px}
+.edu-body h3{font-size:22px;font-weight:800;margin-bottom:6px;color:#fff}
+.edu-body .meta{color:var(--primary);font-weight:700;font-size:14px;margin-bottom:10px}
+.edu-body p{color:var(--text-dim);font-size:15px}
+@media (max-width:600px){.edu-card{flex-direction:column;text-align:center}}
+
+/* ===== SKILLS GRID ===== */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.skill-card{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:16px;padding:24px;transition:all .3s;position:relative;overflow:hidden}
+.skill-card::before{content:'';position:absolute;top:0;right:0;width:100%;height:3px;background:linear-gradient(90deg,var(--primary),var(--accent));transform:scaleX(0);transform-origin:right;transition:transform .4s}
+.skill-card:hover{border-color:rgba(56,189,248,0.35);transform:translateY(-4px)}
+.skill-card:hover::before{transform:scaleX(1)}
+.skill-icon{width:48px;height:48px;border-radius:12px;background:rgba(56,189,248,0.1);border:1px solid var(--border);display:grid;place-items:center;color:var(--primary);margin-bottom:16px}
+.skill-icon svg{width:24px;height:24px}
+.skill-card h4{font-size:17px;font-weight:800;margin-bottom:6px;color:#fff}
+.skill-card .level{display:inline-block;padding:4px 10px;border-radius:6px;background:rgba(56,189,248,0.1);color:var(--primary);font-size:12px;font-weight:700;margin-top:8px}
+
+/* ===== CAMERA SECTION ===== */
+.camera-section{background:linear-gradient(135deg,rgba(15,23,42,0.6),rgba(30,41,59,0.3));border:1px solid var(--border);border-radius:24px;padding:48px;position:relative;overflow:hidden}
+.camera-section::before{content:'';position:absolute;top:-100px;left:-100px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(56,189,248,0.15),transparent 70%)}
+.camera-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:center;position:relative;z-index:1}
+@media (max-width:900px){.camera-grid{grid-template-columns:1fr}.camera-section{padding:32px 24px}}
+.camera-list{display:grid;gap:14px}
+.camera-item{display:flex;align-items:center;gap:14px;padding:14px 18px;border-radius:12px;background:rgba(5,7,13,0.5);border:1px solid var(--border);transition:all .25s}
+.camera-item:hover{border-color:var(--primary);transform:translateX(-6px)}
+.camera-item .ic{width:38px;height:38px;border-radius:10px;flex-shrink:0;background:linear-gradient(135deg,var(--primary),var(--accent));display:grid;place-items:center;color:#001018}
+.camera-item .ic svg{width:18px;height:18px}
+.camera-item span{font-weight:600;color:var(--text)}
+.cert-card{background:var(--glass-strong);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:18px;padding:24px;text-align:center}
+.cert-placeholder{aspect-ratio:4/3;border:2px dashed rgba(56,189,248,0.3);border-radius:12px;display:grid;place-items:center;color:var(--text-mute);margin-bottom:16px;background:rgba(5,7,13,0.4);font-size:14px;padding:20px}
+.cert-placeholder svg{width:40px;height:40px;color:var(--primary);margin-bottom:8px;display:block;margin-inline:auto}
+.cert-card h4{font-size:16px;font-weight:800;color:var(--primary);margin-bottom:6px}
+.cert-card p{font-size:13px;color:var(--text-dim)}
+
+/* ===== EXPERIENCE ===== */
+.exp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.exp-card{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:18px;padding:28px;transition:all .3s;position:relative}
+.exp-card:hover{border-color:rgba(56,189,248,0.35);transform:translateY(-4px)}
+.exp-num{position:absolute;top:20px;left:20px;font-size:48px;font-weight:900;color:rgba(56,189,248,0.08);line-height:1}
+.exp-card .ic{width:50px;height:50px;border-radius:14px;background:linear-gradient(135deg,rgba(56,189,248,0.2),rgba(34,211,238,0.1));border:1px solid var(--border);display:grid;place-items:center;color:var(--primary);margin-bottom:16px}
+.exp-card .ic svg{width:24px;height:24px}
+.exp-card h4{font-size:18px;font-weight:800;margin-bottom:10px;color:#fff}
+.exp-card p{color:var(--text-dim);font-size:14px;line-height:1.8}
+
+/* ===== PROJECTS (UPDATED DYNAMIC SECTION) ===== */
+.projects-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;flex-wrap:wrap;gap:16px}
+.projects-count{font-size:18px;font-weight:700;color:var(--text)}
+.projects-count span{color:var(--primary);font-size:24px;font-weight:900}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px}
+.project-card{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:18px;overflow:hidden;transition:all .3s;display:flex;flex-direction:column}
+.project-card:hover{border-color:rgba(56,189,248,0.35);transform:translateY(-6px);box-shadow:var(--glow)}
+.project-img{width:100%;aspect-ratio:16/9;object-fit:cover;border-bottom:1px solid var(--border);background:var(--bg-1)}
+.project-body{padding:20px;flex:1;display:flex;flex-direction:column}
+.project-type{display:inline-block;padding:4px 10px;border-radius:6px;background:rgba(56,189,248,0.1);color:var(--primary);font-size:12px;font-weight:700;margin-bottom:10px;width:fit-content}
+.project-body h4{font-size:18px;font-weight:800;margin-bottom:8px;color:#fff}
+.project-body p{font-size:14px;color:var(--text-dim);margin-bottom:16px;flex:1;line-height:1.6}
+.project-tech{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
+.project-tech span{padding:4px 10px;border-radius:6px;background:rgba(148,163,184,0.1);color:var(--text-dim);font-size:12px;font-weight:600;border:1px solid rgba(148,163,184,0.1)}
+.project-actions{display:flex;gap:8px;margin-top:auto}
+.project-actions .btn{flex:1;justify-content:center;padding:10px;font-size:13px}
+.btn-edit{background:rgba(56,189,248,0.1);color:var(--primary);border:1px solid var(--border)}
+.btn-edit:hover{background:rgba(56,189,248,0.2)}
+.btn-delete{background:rgba(239,68,68,0.1);color:#ef4444;border:1px solid rgba(239,68,68,0.2)}
+.btn-delete:hover{background:rgba(239,68,68,0.2)}
+.projects-empty{text-align:center;padding:60px 20px;background:var(--glass);border:1px dashed var(--border);border-radius:20px}
+.projects-empty svg{width:64px;height:64px;color:var(--primary);margin-bottom:16px;opacity:0.7}
+.projects-empty h4{font-size:20px;font-weight:800;margin-bottom:8px;color:#fff}
+.projects-empty p{color:var(--text-dim);margin-bottom:24px}
+
+/* ===== MODAL ===== */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(8px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s}
+.modal-overlay.active{opacity:1;pointer-events:auto}
+.modal-content{background:var(--bg-1);border:1px solid var(--border);border-radius:20px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto;padding:28px;position:relative;transform:translateY(20px);transition:transform .3s}
+.modal-overlay.active .modal-content{transform:translateY(0)}
+.modal-close{position:absolute;top:16px;left:16px;background:none;border:none;color:var(--text-mute);cursor:pointer;font-size:24px;transition:color .2s}
+.modal-close:hover{color:#ef4444}
+.modal-title{font-size:22px;font-weight:800;margin-bottom:24px;color:#fff;display:flex;align-items:center;gap:10px}
+.form-group{margin-bottom:18px}
+.form-group label{display:block;font-size:14px;font-weight:600;color:var(--text-dim);margin-bottom:8px}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:12px 16px;border-radius:10px;background:var(--bg-0);border:1px solid var(--border);color:var(--text);font-family:inherit;font-size:14px;transition:all .2s;outline:none}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(56,189,248,0.1)}
+.form-group textarea{resize:vertical;min-height:80px}
+.form-group small{display:block;margin-top:6px;font-size:12px;color:var(--text-mute)}
+.file-input-wrapper{position:relative;border:2px dashed var(--border);border-radius:10px;padding:20px;text-align:center;cursor:pointer;transition:all .2s;background:var(--bg-0)}
+.file-input-wrapper:hover{border-color:var(--primary);background:rgba(56,189,248,0.05)}
+.file-input-wrapper input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.file-input-wrapper svg{width:32px;height:32px;color:var(--primary);margin-bottom:8px}
+.file-input-wrapper p{font-size:14px;color:var(--text-dim)}
+.image-preview{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:10px;margin-top:12px;display:none;border:1px solid var(--border)}
+.modal-actions{display:flex;gap:12px;margin-top:24px}
+.modal-actions .btn{flex:1;justify-content:center}
+
+/* ===== SERVICES ===== */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.service-card{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:18px;padding:30px;transition:all .3s;position:relative;overflow:hidden}
+.service-card::after{content:'';position:absolute;bottom:-50%;right:-50%;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(56,189,248,0.1),transparent 70%);transition:all .5s}
+.service-card:hover{border-color:rgba(56,189,248,0.35);transform:translateY(-6px)}
+.service-card:hover::after{bottom:-30%;right:-30%}
+.service-card .ic{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,var(--primary),var(--primary-2));display:grid;place-items:center;color:#001018;margin-bottom:18px;box-shadow:0 8px 20px rgba(56,189,248,0.25);position:relative;z-index:1}
+.service-card .ic svg{width:28px;height:28px}
+.service-card h4{font-size:18px;font-weight:800;margin-bottom:10px;color:#fff;position:relative;z-index:1}
+.service-card p{color:var(--text-dim);font-size:14px;position:relative;z-index:1}
+
+/* ===== CERTIFICATES ===== */
+.certs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.cert-slot{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:18px;padding:24px;text-align:center;transition:all .3s}
+.cert-slot:hover{border-color:rgba(56,189,248,0.35);transform:translateY(-4px)}
+.cert-slot .ph{aspect-ratio:4/3;border:2px dashed rgba(56,189,248,0.25);border-radius:12px;display:grid;place-items:center;color:var(--text-mute);margin-bottom:16px;font-size:13px}
+.cert-slot .ph svg{width:32px;height:32px;color:var(--primary);margin-bottom:6px;display:block;margin-inline:auto}
+.cert-slot h4{font-size:15px;font-weight:800;color:#fff;margin-bottom:4px}
+.cert-slot p{font-size:13px;color:var(--text-dim)}
+.cert-slot.add-new{border-style:dashed;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:280px;cursor:pointer;color:var(--text-mute)}
+.cert-slot.add-new:hover{color:var(--primary);border-color:var(--primary)}
+.cert-slot.add-new svg{width:36px;height:36px;margin-bottom:10px}
+
+/* ===== WHY ME ===== */
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.why-item{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:14px;padding:22px;display:flex;gap:14px;align-items:flex-start;transition:all .3s}
+.why-item:hover{border-color:rgba(56,189,248,0.35);transform:translateY(-3px)}
+.why-item .ic{width:40px;height:40px;border-radius:10px;flex-shrink:0;background:rgba(56,189,248,0.1);border:1px solid var(--border);display:grid;place-items:center;color:var(--primary)}
+.why-item .ic svg{width:20px;height:20px}
+.why-item h4{font-size:15px;font-weight:800;margin-bottom:4px;color:#fff}
+.why-item p{font-size:13px;color:var(--text-dim)}
+
+/* ===== CONTACT ===== */
+.contact-wrap{background:linear-gradient(135deg,rgba(56,189,248,0.08),rgba(34,211,238,0.04));border:1px solid var(--border);border-radius:24px;padding:48px;text-align:center;position:relative;overflow:hidden}
+.contact-wrap::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(56,189,248,0.1),transparent 70%);pointer-events:none}
+.contact-wrap > *{position:relative;z-index:1}
+.contact-wrap h3{font-size:28px;font-weight:900;margin-bottom:10px;color:#fff}
+.contact-wrap > p{color:var(--text-dim);margin-bottom:32px;max-width:500px;margin-inline:auto}
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:32px}
+.contact-item{background:var(--glass-strong);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:14px;padding:20px;transition:all .3s}
+.contact-item:hover{border-color:var(--primary)}
+.contact-item .ic{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--accent));display:grid;place-items:center;color:#001018;margin:0 auto 12px}
+.contact-item .ic svg{width:22px;height:22px}
+.contact-item h5{font-size:13px;color:var(--text-mute);margin-bottom:6px;font-weight:600}
+.contact-item a,.contact-item span{color:var(--text);font-weight:700;text-decoration:none;font-size:15px;word-break:break-word}
+.contact-item a:hover{color:var(--primary)}
+.contact-item .placeholder{color:var(--text-mute);font-style:italic;font-weight:500}
+.contact-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-wa{background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;box-shadow:0 8px 24px rgba(37,211,102,0.3)}
+.btn-wa:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(37,211,102,0.45)}
+
+/* ===== FOOTER ===== */
+footer{padding:40px 0 30px;border-top:1px solid var(--border);text-align:center;color:var(--text-mute);font-size:14px;position:relative;z-index:1}
+footer .name{color:var(--primary);font-weight:700}
+
+/* ===== ANIMATIONS ===== */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s,transform .7s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:var(--bg-0)}
+::-webkit-scrollbar-thumb{background:rgba(56,189,248,0.25);border-radius:10px}
+::-webkit-scrollbar-thumb:hover{background:rgba(56,189,248,0.4)}
+::selection{background:var(--primary);color:#001018}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="#home" class="nav-logo"><span class="nav-logo-mark">ن</span><span>نصر الغيثي</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="القائمة">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="#about">نبذة</a><a href="#skills">المهارات</a><a href="#camera">المراقبة</a>
+      <a href="#experience">الخبرات</a><a href="#projects">المشاريع</a><a href="#services">الخدمات</a><a href="#contact">تواصل</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="home">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge"><span class="dot"></span> متاح لاستقبال المشاريع</div>
+        <h1>نصر محمد احمد عبده الغيثي</h1>
+        <div class="role">مطور برمجيات وتقنيات</div>
+        <p class="intro">أعمل على تطوير الحلول البرمجية والمواقع والتطبيقات، إلى جانب بناء الأنظمة التقنية وحلول كاميرات المراقبة.</p>
+        <div class="hero-actions">
+          <a href="#skills" class="btn btn-primary"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>مشاهدة المهارات</a>
+          <a href="#projects" class="btn btn-ghost"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>مشاهدة المشاريع</a>
+          <a href="#contact" class="btn btn-ghost"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.37 1.9.72 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0122 16.92z"/></svg>تواصل معي</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-card">
+          <div class="code-header"><span></span><span></span><span></span></div>
+          <div class="code-body">
+<span class="c">// profile.js</span><br>
+<span class="k">const</span> <span class="v">developer</span> = {<br>
+&nbsp;&nbsp;name: <span class="s">"نصر الغيثي"</span>,<br>
+&nbsp;&nbsp;role: <span class="s">"Software Dev"</span>,<br>
+&nbsp;&nbsp;skills: [<span class="s">"Java"</span>, <span class="s">"Web"</span>, <span class="s">"CCTV"</span>],<br>
+&nbsp;&nbsp;available: <span class="v">true</span><br>
+};
+          </div>
+        </div>
+        <div class="floating-chip chip-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>Java</div>
+        <div class="floating-chip chip-2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>CCTV</div>
+        <div class="floating-chip chip-3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>Systems</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-head reveal"><span class="section-tag">01 — نبذة</span><h2 class="section-title">نبذة عني</h2><p class="section-sub">تعرّف أكثر على مسيرتي المهنية وتخصصاتي</p></div>
+    <div class="about-grid">
+      <div class="about-card reveal">
+        <h3><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>من أنا</h3>
+        <p>أنا نصر محمد احمد عبده الغيثي، مطور برمجيات وتقنيات، حاصل على دبلوم في البرمجة بعد دراسة لمدة سنتين. أعمل على تطوير مواقع الويب والتطبيقات باستخدام عدة تقنيات برمجية، كما أمتلك خبرة عملية في تركيب وبرمجة أنظمة كاميرات المراقبة المتكاملة، وحاصل على شهادة معتمدة في هذا المجال.</p>
+      </div>
+      <div class="about-card reveal">
+        <h3><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>مجالات عملي</h3>
+        <ul>
+          <li>تطوير مواقع الويب والتطبيقات</li><li>البرمجة بلغة Java وتقنيات الويب</li>
+          <li>تصميم أنظمة Excel و Access</li><li>تحليل البيانات وتنظيمها</li>
+          <li>تركيب وبرمجة أنظمة كاميرات المراقبة</li><li>بناء حلول أمنية متكاملة</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="container">
+    <div class="section-head reveal"><span class="section-tag">02 — التعليم</span><h2 class="section-title">التعليم</h2></div>
+    <div class="edu-card reveal">
+      <div class="edu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.66 3 3 6 3s6-1.34 6-3v-5"/></svg></div>
+      <div class="edu-body">
+        <h3>دبلوم برمجة الحاسوب</h3>
+        <div class="meta">مدة الدراسة: سنتان</div>
+        <p>تأسيس أكاديمي في علوم البرمجة وتطوير البرمجيات، شمل دراسة لغات البرمجة وقواعد البيانات وتطوير التطبيقات.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-head reveal"><span class="section-tag">03 — المهارات</span><h2 class="section-title">المهارات التقنية</h2><p class="section-sub">التقنيات والمهارات البرمجية التي أعمل بها</p></div>
+    <div class="skills-grid">
+      <div class="skill-card reveal"><div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><h4>Java</h4><p style="color:var(--text-dim);font-size:13px">لغة برمجة أساسية في مسيرتي</p><span class="level">متقدم</span></div>
+      <div class="skill-card reveal"><div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg></div><h4>HTML</h4><p style="color:var(--text-dim);font-size:13px">هيكلة صفحات الويب</p></div>
+      <div class="skill-card reveal"><div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M3 9h18"/></svg></div><h4>CSS</h4><p style="color:var(--text-dim);font-size:13px">تنسيق وتصميم الواجهات</p></div>
+      <div class="skill-card reveal"><div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-7m0 10h7M3 7l3 3-3 3"/></svg></div><h4>JavaScript</h4><p style="color:var(--text-dim);font-size:13px">تطوير تفاعلية المواقع</p></div>
+      <div class="skill-card reveal"><div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><h4>تطوير مواقع الويب</h4><p style="color:var(--text-dim);font-size:13px">بناء مواقع احترافية</p></div>
+      <div class="skill-card reveal"><div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div><h4>تطوير التطبيقات</h4><p style="color:var(--text-dim);font-size:13px">تطبيقات برمجية حسب الاحتياج</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SYSTEMS & DATA -->
+<section id="systems">
+  <div class="container">
+    <div class="section-head reveal"><span class="section-tag">04 — الأنظمة</span><h2 class="section-title">الأنظمة وتحليل البيانات</h2><p class="section-sub">خبرة في تصميم الأنظمة الإدارية وتحليل البيانات</p></div>
+    <div class="skills-grid">
+      <div class="skill-card reveal"><div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div><h4>Microsoft Excel</h4><p style="color:var(--text-dim);font-size:13px">جداول ومعادلات متقدمة</p><span class="level">متقدم</span></div>
+      <div class="skill-card reveal"><div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div><h4>Microsoft Access</h4><p style="color:var(--text-dim);font-size:13px">قواعد بيانات وأنظمة</p><span class="level">متقدم</span></div>
+      <div class="skill-card reveal"><div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><h4>Microsoft Word</h4><p style="color:var(--text-dim);font-size:13px">إعداد المستندات والتقارير</p><span class="level">متقدم</span></div>
+      <div class="skill-card reveal"><div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4z"/></svg></div><h4>تصميم أنظمة Excel</h4><p style="color:var(--text-dim);font-size:13px">أنظمة مخصصة لإدارة العمليات</p></div>
+      <div class="skill-card reveal"><div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div><h4>تصميم أنظمة Access</h4><p style="color:var(--text-dim);font-size:13px">قواعد بيانات علائقية</p></div>
+      <div class="skill-card reveal"><div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><h4>تحليل البيانات</h4><p style="color:var(--text-dim);font-size:13px">تنظيم البيانات واستخلاص المعلومات</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CAMERA SYSTEMS -->
+<section id="camera">
+  <div class="container">
+    <div class="section-head reveal"><span class="section-tag">05 — أنظمة المراقبة</span><h2 class="section-title">أنظمة المراقبة والحلول الأمنية</h2><p class="section-sub">خبرة عملية في تركيب وبرمجة أنظمة كاميرات المراقبة المتكاملة</p></div>
+    <div class="camera-section reveal">
+      <div class="camera-grid">
+        <div class="camera-list">
+          <div class="camera-item"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>تركيب كاميرات المراقبة</span></div>
+          <div class="camera-item"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><span>برمجة وإعداد الكاميرات</span></div>
+          <div class="camera-item"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg></div><span>ربط أنظمة المراقبة</span></div>
+          <div class="camera-item"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div><span>إعداد الأنظمة المتكاملة</span></div>
+          <div class="camera-item"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div><span>التعامل مع أنواع مختلفة من الكاميرات</span></div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>مكان صورة الشهادة المعتمدة</div>
+          <h4>شهادة معتمدة</h4><p>في مجال كاميرات المراقبة</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="section-head reveal"><span class="section-tag">06 — الخبرات</span><h2 class="section-title">الخبرات</h2><p class="section-sub">مجالات الخبرة العملية التي أمتلكها</p></div>
+    <div class="exp-grid">
+      <div class="exp-card reveal"><span class="exp-num">01</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><h4>تطوير البرمجيات</h4><p>خبرة في تطوير مواقع الويب والتطبيقات.</p></div>
+      <div class="exp-card reveal"><span class="exp-num">02</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><h4>البرمجة</h4><p>خبرة في Java وHTML وCSS وJavaScript.</p></div>
+      <div class="exp-card reveal"><span class="exp-num">03</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div><h4>الأنظمة والبيانات</h4><p>خبرة في تصميم أنظمة باستخدام Excel وAccess وتحليل البيانات.</p></div>
+      <div class="exp-card reveal"><span class="exp-num">04</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div><h4>أنظمة المراقبة</h4><p>خبرة في تركيب وبرمجة أنظمة كاميرات المراقبة وإنشاء حلول مراقبة متكاملة.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS (DYNAMIC SECTION) -->
+<section id="projects">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-tag">07 — المشاريع</span>
+      <h2 class="section-title">معرض المشاريع</h2>
+      <p class="section-sub">مجموعة من الأعمال البرمجية والأنظمة التي قمت بتطويرها</p>
+    </div>
+    
+    <div class="projects-header reveal">
+      <div class="projects-count">المشاريع المنفذة: <span id="projectCount">0</span></div>
+      <button class="btn btn-primary" onclick="openProjectModal()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        إضافة مشروع
+      </button>
+    </div>
+
+    <div id="projectsGrid" class="projects-grid reveal">
+      <!-- سيتم ملء هذا القسم ديناميكيًا بواسطة JavaScript -->
+    </div>
+  </div>
+</section>
+
+<!-- PROJECT MODAL -->
+<div class="modal-overlay" id="projectModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeProjectModal()">×</button>
+    <h3 class="modal-title" id="modalTitle">إضافة مشروع جديد</h3>
+    <form id="projectForm" onsubmit="saveProject(event)">
+      <input type="hidden" id="projectId">
+      
+      <div class="form-group">
+        <label>اسم المشروع *</label>
+        <input type="text" id="projName" required placeholder="مثال: نظام إدارة الرواتب الذكي">
+      </div>
+
+      <div class="form-group">
+        <label>نوع المشروع *</label>
+        <select id="projType" required>
+          <option value="موقع ويب">موقع ويب</option>
+          <option value="تطبيق">تطبيق</option>
+          <option value="نظام إداري">نظام إداري</option>
+          <option value="أداة برمجية">أداة برمجية</option>
+          <option value="مشروع آخر">مشروع آخر</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>وصف المشروع *</label>
+        <textarea id="projDesc" required placeholder="وصف مختصر لما يفعله المشروع..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>التقنيات المستخدمة *</label>
+        <input type="text" id="projTech" required placeholder="مثال: HTML, CSS, JavaScript">
+        <small>افصل بين التقنيات بفاصلة (,)</small>
+      </div>
+
+      <div class="form-group">
+        <label>صورة المعاينة</label>
+        <div class="file-input-wrapper">
+          <input type="file" id="projImage" accept="image/*" onchange="previewImage(this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <p>اضغط لاختيار صورة من الجهاز</p>
+        </div>
+        <img id="imagePreview" class="image-preview" alt="معاينة">
+      </div>
+
+      <div class="form-group">
+        <label>رابط/مسار ملف المشروع *</label>
+        <input type="text" id="projLink" required placeholder="مثال: projects/payroll.html">
+        <small>💡 ملاحظة: ضع ملفات مشاريعك (مثل payroll.html) داخل مجلد اسمه "projects" بجانب هذا الملف، واكتب المسار هنا.</small>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" onclick="closeProjectModal()">إلغاء</button>
+        <button type="submit" class="btn btn-primary">حفظ المشروع</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="section-head reveal"><span class="section-tag">08 — الخدمات</span><h2 class="section-title">الخدمات التي أقدمها</h2><p class="section-sub">حلول تقنية وبرمجية متكاملة حسب احتياج العميل</p></div>
+    <div class="services-grid">
+      <div class="service-card reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><h4>تطوير مواقع الويب</h4><p>تصميم مواقع الشركات والمطاعم والمتاجر والخدمات.</p></div>
+      <div class="service-card reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><h4>تطوير الأنظمة</h4><p>إنشاء أنظمة إدارية مخصصة حسب احتياجات العميل.</p></div>
+      <div class="service-card reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div><h4>أنظمة Excel وAccess</h4><p>تصميم أنظمة لإدارة البيانات والعمليات المختلفة.</p></div>
+      <div class="service-card reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><h4>تحليل البيانات</h4><p>تنظيم وتحليل البيانات وإنشاء حلول تساعد على فهم المعلومات.</p></div>
+      <div class="service-card reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div><h4>تطوير التطبيقات</h4><p>تطوير تطبيقات وحلول برمجية حسب متطلبات المشروع.</p></div>
+      <div class="service-card reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div><h4>أنظمة كاميرات المراقبة</h4><p>تركيب وبرمجة وربط أنظمة كاميرات المراقبة المتكاملة.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATES -->
+<section id="certificates">
+  <div class="container">
+    <div class="section-head reveal"><span class="section-tag">09 — الشهادات</span><h2 class="section-title">الشهادات</h2><p class="section-sub">الشهادات المعتمدة — جاهز لإضافة المزيد</p></div>
+    <div class="certs-grid">
+      <div class="cert-slot reveal">
+        <div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>مكان صورة الشهادة</div>
+        <h4>شهادة معتمدة في مجال كاميرات المراقبة</h4><p>شهادة عملية في تركيب وبرمجة أنظمة المراقبة</p>
+      </div>
+      <div class="cert-slot add-new reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><strong>إضافة شهادة جديدة</strong><span style="font-size:13px">يمكن إضافة شهادات مستقبلية هنا</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY ME -->
+<section id="why">
+  <div class="container">
+    <div class="section-head reveal"><span class="section-tag">10 — نقاط القوة</span><h2 class="section-title">لماذا أختارني؟</h2></div>
+    <div class="why-grid">
+      <div class="why-item reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div><h4>الاهتمام بجودة العمل</h4><p>أحرص على تقديم عمل دقيق واحترافي في كل مشروع.</p></div></div>
+      <div class="why-item reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div><div><h4>التعلم المستمر</h4><p>أسعى دائمًا لتطوير مهاراتي ومواكبة التقنيات الحديثة.</p></div></div>
+      <div class="why-item reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div><div><h4>حلول حسب الاحتياج</h4><p>أنفذ الحلول البرمجية والتقنية بناءً على احتياج العميل الفعلي.</p></div></div>
+      <div class="why-item reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/></svg></div><div><h4>الجمع بين البرمجة والتقنيات</h4><p>أدمج بين البرمجة والتقنيات الميدانية لتقديم حلول متكاملة.</p></div></div>
+      <div class="why-item reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div><div><h4>الاهتمام بالتفاصيل</h4><p>أولي التفاصيل الصغيرة أهمية كبيرة لضمان جودة الناتج النهائي.</p></div></div>
+      <div class="why-item reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div><div><h4>مشاريع متنوعة</h4><p>القدرة على العمل على مشاريع متنوعة بين البرمجيات والأنظمة التقنية.</p></div></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-head reveal"><span class="section-tag">11 — التواصل</span><h2 class="section-title">تواصل معي</h2><p class="section-sub">جاهز لاستقبال استفساراتك ومشاريعك</p></div>
+    <div class="contact-wrap reveal">
+      <h3>لنبدأ مشروعك القادم</h3>
+      <p>يمكنك التواصل معي مباشرة عبر واتساب أو الاتصال، وسأكون سعيدًا بمناقشة فكرتك وتقديم الحل المناسب.</p>
+      <div class="contact-grid">
+        <div class="contact-item"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.37 1.9.72 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0122 16.92z"/></svg></div><h5>رقم الاتصال / واتساب</h5><a href="tel:785073003" dir="ltr">785073003</a></div>
+        <div class="contact-item"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><h5>البريد الإلكتروني</h5><span class="placeholder">يتم إضافته لاحقًا</span></div>
+        <div class="contact-item"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg></div><h5>GitHub</h5><span class="placeholder">يتم إضافته لاحقًا</span></div>
+        <div class="contact-item"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div><h5>LinkedIn</h5><span class="placeholder">يتم إضافته لاحقًا</span></div>
+        <div class="contact-item"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div><h5>منصات العمل الحر</h5><span class="placeholder">يتم إضافتها لاحقًا</span></div>
+      </div>
+      <div class="contact-actions">
+        <a href="https://wa.me/967785073003" target="_blank" class="btn btn-wa"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>محادثة واتساب</a>
+        <a href="tel:785073003" class="btn btn-primary"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.37 1.9.72 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0122 16.92z"/></svg>اتصال مباشر</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>© 2026 <span class="name">نصر الغيثي</span> — جميع الحقوق محفوظة</p>
+  </div>
+</footer>
+
+<script>
+// ==========================================
+// إدارة قسم المشاريع الديناميكي
+// ==========================================
+
+// 1. تحميل المشاريع من LocalStorage عند بدء التشغيل
+let projects = JSON.parse(localStorage.getItem('portfolio_projects')) || [];
+
+// 2. دالة عرض المشاريع في الصفحة
+function renderProjects() {
+  const grid = document.getElementById('projectsGrid');
+  const countEl = document.getElementById('projectCount');
+  
+  countEl.textContent = projects.length;
+  grid.innerHTML = '';
+
+  if (projects.length === 0) {
+    grid.innerHTML = `
+      <div class="projects-empty" style="grid-column: 1 / -1;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        <h4>لا توجد مشاريع مضافة حتى الآن</h4>
+        <p>ابدأ بإضافة أول مشروع إلى معرض أعمالك ليظهر هنا بشكل احترافي.</p>
+        <button class="btn btn-primary" onclick="openProjectModal()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          إضافة أول مشروع
+        </button>
+      </div>
+    `;
+    return;
+  }
+
+  projects.forEach(proj => {
+    const techTags = proj.technologies.map(t => `<span>${t.trim()}</span>`).join('');
+    const card = document.createElement('div');
+    card.className = 'project-card reveal visible';
+    card.innerHTML = `
+      <img src="${proj.image || 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'225\' viewBox=\'0 0 400 225\'%3E%3Crect width=\'400\' height=\'225\' fill=\'%230f172a\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%2338bdf8\' font-family=\'sans-serif\' font-size=\'20\'%3Eبدون صورة%3C/text%3E%3C/svg%3E'}" alt="${proj.name}" class="project-img">
+      <div class="project-body">
+        <span class="project-type">${proj.type}</span>
+        <h4>${proj.name}</h4>
+        <p>${proj.description}</p>
+        <div class="project-tech">${techTags}</div>
+        <div class="project-actions">
+          <a href="${proj.link}" target="_blank" class="btn btn-primary">فتح المشروع</a>
+          <button class="btn btn-edit" onclick="editProject('${proj.id}')">تعديل</button>
+          <button class="btn btn-delete" onclick="deleteProject('${proj.id}')">حذف</button>
+        </div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+// 3. دالة ضغط الصور لتجنب امتلاء LocalStorage
+function compressImage(file) {
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = (e) => {
+      const img = new Image();
+      img.src = e.target.result;
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const MAX_WIDTH = 800; // عرض أقصى لتقليل الحجم
+        const scaleSize = MAX_WIDTH / img.width;
+        canvas.width = MAX_WIDTH;
+        canvas.height = img.height * scaleSize;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        // ضغط الصورة بصيغة JPEG وجودة 0.7
+        resolve(canvas.toDataURL('image/jpeg', 0.7));
+      };
+    };
+  });
+}
+
+// 4. معاينة الصورة عند الاختيار
+let currentImageBase64 = '';
+function previewImage(input) {
+  const preview = document.getElementById('imagePreview');
+  if (input.files && input.files[0]) {
+    const file = input.files[0];
+    compressImage(file).then(compressed => {
+      currentImageBase64 = compressed;
+      preview.src = compressed;
+      preview.style.display = 'block';
+    });
+  }
+}
+
+// 5. فتح وإغلاق النافذة المنبثقة
+function openProjectModal(projectId = null) {
+  const modal = document.getElementById('projectModal');
+  const form = document.getElementById('projectForm');
+  const title = document.getElementById('modalTitle');
+  const preview = document.getElementById('imagePreview');
+  
+  form.reset();
+  preview.style.display = 'none';
+  currentImageBase64 = '';
+  document.getElementById('projectId').value = '';
+
+  if (projectId) {
+    const proj = projects.find(p => p.id === projectId);
+    if (proj) {
+      title.textContent = 'تعديل المشروع';
+      document.getElementById('projectId').value = proj.id;
+      document.getElementById('projName').value = proj.name;
+      document.getElementById('projType').value = proj.type;
+      document.getElementById('projDesc').value = proj.description;
+      document.getElementById('projTech').value = proj.technologies.join(', ');
+      document.getElementById('projLink').value = proj.link;
+      if (proj.image) {
+        currentImageBase64 = proj.image;
+        preview.src = proj.image;
+        preview.style.display = 'block';
+      }
+    }
+  } else {
+    title.textContent = 'إضافة مشروع جديد';
+  }
+  
+  modal.classList.add('active');
+}
+
+function closeProjectModal() {
+  document.getElementById('projectModal').classList.remove('active');
+}
+
+// إغلاق النافذة عند الضغط خارجها
+document.getElementById('projectModal').addEventListener('click', (e) => {
+  if (e.target.id === 'projectModal') closeProjectModal();
+});
+
+// 6. حفظ المشروع (إضافة أو تعديل)
+async function saveProject(event) {
+  event.preventDefault();
+  
+  const id = document.getElementById('projectId').value;
+  const name = document.getElementById('projName').value.trim();
+  const type = document.getElementById('projType').value;
+  const description = document.getElementById('projDesc').value.trim();
+  const techInput = document.getElementById('projTech').value.trim();
+  const link = document.getElementById('projLink').value.trim();
+  
+  const technologies = techInput.split(',').map(t => t.trim()).filter(t => t);
+
+  const projectData = {
+    id: id || Date.now().toString(),
+    name,
+    type,
+    description,
+    technologies,
+    image: currentImageBase64,
+    link
+  };
+
+  if (id) {
+    // تعديل مشروع موجود
+    const index = projects.findIndex(p => p.id === id);
+    if (index !== -1) {
+      // الاحتفاظ بالصورة القديمة إذا لم يتم اختيار صورة جديدة
+      if (!currentImageBase64 && projects[index].image) {
+        projectData.image = projects[index].image;
+      }
+      projects[index] = projectData;
+    }
+  } else {
+    // إضافة مشروع جديد
+    projects.push(projectData);
+  }
+
+  try {
+    localStorage.setItem('portfolio_projects', JSON.stringify(projects));
+    renderProjects();
+    closeProjectModal();
+  } catch (e) {
+    alert('عذراً، مساحة التخزين ممتلئة. حاول استخدام صورة أصغر أو حذف بعض المشاريع القديمة.');
+  }
+}
+
+// 7. تعديل وحذف المشاريع
+function editProject(id) {
+  openProjectModal(id);
+}
+
+function deleteProject(id) {
+  if (confirm('هل أنت متأكد من حذف هذا المشروع؟ لا يمكن التراجع عن هذا الإجراء.')) {
+    projects = projects.filter(p => p.id !== id);
+    localStorage.setItem('portfolio_projects', JSON.stringify(projects));
+    renderProjects();
+  }
+}
+
+// ==========================================
+// وظائف الموقع العامة (القائمة، التمرير)
+// ==========================================
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+const navbar = document.querySelector('.navbar');
+window.addEventListener('scroll', () => {
+  navbar.style.boxShadow = window.scrollY > 20 ? '0 4px 30px rgba(0,0,0,0.3)' : 'none';
+});
+
+// تشغيل عرض المشاريع عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', renderProjects);
+</script>
+</body>
+</html>
